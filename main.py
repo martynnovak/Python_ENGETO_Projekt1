@@ -36,6 +36,9 @@ TEXTS = [
 print("_ "*30)
 print(" ")
 
+"""Počet textů k analýze."""
+text_count = len(TEXTS)
+
 user=input("Zadejte uživatelské jméno: ")
 password=input("Zadejte heslo: ")
 print("_ "*30)
@@ -50,7 +53,7 @@ users = {
 
 if user in users and password == users[user]:
     print(f"Vítejte {user}!")
-    print("Můžete analyzovat 3 texty.")
+    print(f"Počet textů k analýze: {text_count}.")
     
 else:
     print("Neplatné uživatelské jméno nebo heslo. Program bude ukončen")
@@ -59,10 +62,10 @@ else:
 print("_ "*30)
 print(" ")
 
-text_num = input("Zadejte číslo textu (1-3): ")
+text_num = int(input(f"Zadejte číslo textu (1-{text_count}): "))
 
-if text_num not in ["1", "2", "3"]:
-    print("Neplatné číslo textu. Zadejte číslo mezi 1 a 3.")
+if text_num > text_count or text_num < 1:
+    print(f"Neplatné číslo textu. Zadejte číslo mezi 1 a {text_count}.")
     exit()
 
 print("_ "*30) 
@@ -111,6 +114,7 @@ print(" ")
 """jednoduchý sloupcový graf, který bude reprezentovat četnost různých délek slov"""
 delka_slov = {}
 for word in text.split():
+    word = word.strip('.,;:!?()[]{}"\'')
     delka = len(word)
     if delka not in delka_slov:
         delka_slov[delka] = 1
